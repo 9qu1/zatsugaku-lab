@@ -22,6 +22,7 @@ if (!existsSync(VIDEOS)) {
 }
 
 // seriesスラッグ → 記事のcategory
+// ここに無いseries(例:「身近なフシギ」)はサイトの守備範囲外なので候補に出さない
 const CAT = {
   '認知バイアス': 'bias',
   '脳と習慣': 'brain',
@@ -29,7 +30,6 @@ const CAT = {
   '社会のしくみ': 'society',
   '組織': 'org',
   '自分と孤独': 'self',
-  '身近なフシギ': 'bias',
 };
 
 const rows = [];

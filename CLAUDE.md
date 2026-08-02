@@ -32,10 +32,26 @@ videoId: YouTubeのID。未公開なら空欄(tools/sync-videos.mjs が公開後
 - 本文の**最初のブロックは必ず引用(`> `)で1〜2文の要約**を書く(付箋「ラボメモ」としてデザインされる)。
 - カテゴリは動画のseriesと対応: 認知バイアス=bias / 脳と習慣=brain / 人間関係=relations / 社会のしくみ=society / 組織=org / 自分と孤独=self
 
+## SNS告知(記事ごとに必須)
+
+記事と同名の `articles/<スラッグ>.sns.json` を作る: `{ "ja": "投稿文" }`
+
+- 文体: 「へえ」と思って友だちに話すような落ち着いたカジュアルさ。煽らない
+- 記事でいちばん意外な事実(数字・実験のオチ)を1つだけ具体的に出す
+- 100〜160字、絵文字0〜1個、末尾にハッシュタグ2個。URLはスクリプトが付けるので書かない
+
+投稿は**必ずローカルから**(Actions経由は文字化けするので使わない):
+```
+node scripts/post-bluesky.mjs articles/<スラッグ>.md
+node scripts/post-threads.mjs articles/<スラッグ>.md
+```
+`SNS_DRY_RUN=1` を付けると投稿内容の確認だけできる。認証情報は自前の `.secrets.json`、無ければ ai-news-daily のものを流用する(アカウントは3サイト共用)。**中身をログに出さないこと。**
+
 ## 運用
 
 - ビルド: `node build.js` → dist/ ・ プレビュー: `node scripts/serve.mjs` → http://localhost:4750
 - 動画ID同期: `node tools/sync-videos.mjs`(ローカル専用。pushの前に実行)
+- 次に書く候補: `node tools/next-topics.mjs`(未記事化の動画トピック一覧)
 - 広告はconfig/ads.jsonの記事本文下スロットのみ。**トップ・一覧・固定ページ・フッターに広告を置かない**(ユーザー方針)
 - サイト上に「AIが書いている」とは書かない(ユーザー方針)。config/pages/src/build.jsは記事追加タスクでは触らない
 
