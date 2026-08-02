@@ -1,0 +1,12 @@
+{
+  "name": "zatsugaku-lab",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build.js",
+    "serve": "node scripts/serve.mjs"
+  },
+  "dependencies": {
+    "marked": "^12.0.0"
+  }
+}

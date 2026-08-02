@@ -1,0 +1,267 @@
+/* ずんだ雑学ラボ — ラボノート風デザイン
+   コンセプト: クリーム色の方眼ノートに、丸ゴシックの見出しと付箋・ステッカー。
+   よくあるメディアサイトのグラデ&カード羅列にしない。 */
+
+:root {
+  --paper: #f7f3e9;
+  --card: #fffdf6;
+  --ink: #33322c;
+  --ink-soft: #6d6a5e;
+  --line: #e4dcc6;
+  --grid: rgba(122, 148, 96, 0.10);
+  --zunda: #79b747;
+  --zunda-deep: #4f7d2c;
+  --marker: rgba(255, 226, 110, 0.55);
+  --sticky: #fff3b8;
+  --bias: #d96c5f;
+  --brain: #6a9f3e;
+  --relations: #e0913f;
+  --society: #5f87c9;
+  --org: #9a6fc0;
+  --self: #45a29c;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  color: var(--ink);
+  font-family: 'Zen Kaku Gothic New', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+  font-size: 16px;
+  line-height: 1.9;
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 26px 26px;
+}
+
+.wrap { max-width: 980px; margin: 0 auto; padding: 0 20px; }
+a { color: var(--zunda-deep); }
+
+h1, h2, h3, .brand, .chip {
+  font-family: 'Zen Maru Gothic', 'Hiragino Maru Gothic ProN', sans-serif;
+}
+
+/* ---------- ヘッダー ---------- */
+.site-header {
+  background: var(--card);
+  border-bottom: 3px solid var(--ink);
+  position: relative;
+}
+.site-header::after {
+  content: '';
+  display: block;
+  height: 5px;
+  background: repeating-linear-gradient(90deg, var(--zunda) 0 14px, transparent 14px 22px);
+  opacity: .7;
+}
+.header-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; padding-top: 14px; padding-bottom: 12px; flex-wrap: wrap;
+}
+.brand {
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none; color: var(--ink);
+}
+.bean { width: 40px; height: 40px; transform: rotate(-6deg); }
+.brand:hover .bean { transform: rotate(8deg) scale(1.06); transition: transform .25s; }
+.brand-text { font-weight: 900; font-size: 1.35rem; line-height: 1.2; letter-spacing: .02em; }
+.brand-text small {
+  display: block; font-size: .68rem; font-weight: 700; color: var(--ink-soft); letter-spacing: .06em;
+}
+.nav { display: flex; gap: 4px; flex-wrap: wrap; }
+.nav a {
+  text-decoration: none; color: var(--ink); font-weight: 700; font-size: .92rem;
+  padding: 6px 12px; border-radius: 999px; border: 1.5px solid transparent;
+}
+.nav a:hover { border-color: var(--ink); background: var(--sticky); }
+
+/* ---------- ヒーロー ---------- */
+.hero { padding: 52px 0 16px; }
+.hero h1 {
+  font-size: clamp(1.7rem, 4.6vw, 2.6rem);
+  font-weight: 900; line-height: 1.5; margin: 0 0 14px;
+}
+.hero h1, .sec-title, .article h1 {
+  background-image: linear-gradient(transparent 68%, var(--marker) 68% 92%, transparent 92%);
+  background-repeat: no-repeat;
+  width: fit-content;
+}
+.lead { color: var(--ink-soft); max-width: 640px; margin: 0 0 18px; }
+
+/* ---------- カテゴリのステッカー ---------- */
+.cat-nav { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 8px; }
+.chip {
+  display: inline-block; padding: 3px 12px 4px; border-radius: 999px;
+  font-size: .78rem; font-weight: 700; color: #fff; text-decoration: none;
+  transform: rotate(-1.2deg); border: 1.5px solid rgba(0,0,0,.18);
+  box-shadow: 1px 2px 0 rgba(51,50,44,.18);
+}
+.cat-nav .chip:nth-child(even) { transform: rotate(1.1deg); }
+.cat-nav .chip:hover { transform: rotate(0) scale(1.05); }
+.chip-on { outline: 2.5px solid var(--ink); outline-offset: 1.5px; }
+.cat-bias { background: var(--bias); }
+.cat-brain { background: var(--brain); }
+.cat-relations { background: var(--relations); }
+.cat-society { background: var(--society); }
+.cat-org { background: var(--org); }
+.cat-self { background: var(--self); }
+
+/* ---------- 記事カード(índexカード風) ---------- */
+.sec-title { font-size: 1.3rem; font-weight: 900; margin: 40px 0 16px; }
+.grid {
+  display: grid; gap: 18px;
+  grid-template-columns: repeat(auto-fill, minmax(272px, 1fr));
+}
+.card {
+  position: relative;
+  background:
+    linear-gradient(var(--card), var(--card)) padding-box,
+    repeating-linear-gradient(transparent 0 30px, rgba(122,148,96,.14) 30px 31px) padding-box;
+  border: 1.6px solid var(--line);
+  border-radius: 4px 14px 14px 14px;
+  padding: 16px 16px 40px;
+  text-decoration: none; color: var(--ink);
+  transform: rotate(-.35deg);
+  box-shadow: 2px 3px 0 rgba(51,50,44,.08);
+  transition: transform .18s, box-shadow .18s;
+}
+.grid .card:nth-child(even) { transform: rotate(.4deg); }
+.card:hover {
+  transform: rotate(0) translateY(-3px);
+  box-shadow: 3px 6px 0 rgba(51,50,44,.14);
+  border-color: var(--zunda-deep);
+}
+.card-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+.minutes { font-size: .74rem; color: var(--ink-soft); }
+.card-title { margin: 0 0 6px; font-size: 1.04rem; font-weight: 700; line-height: 1.55; }
+.card-desc {
+  margin: 0; font-size: .85rem; color: var(--ink-soft); line-height: 1.7;
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+}
+.card-more {
+  position: absolute; right: 14px; bottom: 10px;
+  font-size: .78rem; font-weight: 700; color: var(--zunda-deep);
+}
+.more { text-align: right; margin: 14px 0 0; }
+.more a { font-weight: 700; text-decoration: none; }
+.more a:hover { text-decoration: underline; }
+
+/* ---------- ラボの説明ボックス ---------- */
+.lab-note {
+  margin: 48px 0 56px; padding: 6px 22px 14px;
+  background: var(--card); border: 1.6px dashed var(--zunda-deep); border-radius: 14px;
+}
+.lab-note p { color: var(--ink-soft); margin: 8px 0 6px; }
+
+/* ---------- 記事ページ ---------- */
+.article { padding: 44px 0 30px; max-width: 720px; margin: 0 auto; }
+.article h1 {
+  font-size: clamp(1.5rem, 4vw, 2.1rem);
+  font-weight: 900; line-height: 1.6; margin: 10px 0 22px;
+}
+.article-body { font-size: 1.02rem; }
+.article-body p { margin: 1.15em 0; }
+.article-body h2 {
+  font-size: 1.22rem; font-weight: 900; margin: 2.2em 0 .7em;
+  padding-left: 14px; border-left: 6px solid var(--zunda);
+  line-height: 1.5;
+}
+.article-body h3 { font-size: 1.05rem; margin: 1.8em 0 .5em; }
+.article-body strong { background-image: linear-gradient(transparent 70%, var(--marker) 70%); }
+.article-body ul, .article-body ol { padding-left: 1.5em; }
+.article-body li { margin: .35em 0; }
+
+/* 最初のblockquote = ラボメモ(付箋) */
+.article-body > blockquote:first-child {
+  margin: 0 0 26px; padding: 14px 18px 12px 18px;
+  background: var(--sticky);
+  border: none; border-radius: 2px 10px 10px 10px;
+  transform: rotate(-.5deg);
+  box-shadow: 2px 3px 0 rgba(51,50,44,.12);
+  position: relative;
+  font-size: .95rem;
+}
+.article-body > blockquote:first-child::before {
+  content: 'ラボメモ';
+  position: absolute; top: -12px; left: 12px;
+  background: var(--zunda-deep); color: #fff;
+  font-family: 'Zen Maru Gothic', sans-serif; font-weight: 700; font-size: .7rem;
+  padding: 2px 10px; border-radius: 999px; transform: rotate(-2deg);
+}
+.article-body > blockquote:first-child p { margin: .3em 0; }
+
+/* それ以外の引用 */
+.article-body blockquote:not(:first-child) {
+  margin: 1.2em 0; padding: 2px 16px; color: var(--ink-soft);
+  border-left: 4px solid var(--line); background: rgba(255,255,255,.5);
+}
+
+/* 参考にした資料 */
+.sources {
+  margin-top: 2.5em; padding: 4px 18px 10px;
+  background: var(--card); border: 1.6px solid var(--line); border-radius: 12px;
+}
+.sources h2 { border-left: none; padding-left: 0; font-size: .95rem; margin: .9em 0 .3em; }
+.sources ul { font-size: .84rem; color: var(--ink-soft); margin: .4em 0; }
+
+/* 動画セクション */
+.video-sec { margin: 40px 0 8px; text-align: center; }
+.video-sec h2 { font-size: 1.05rem; font-weight: 900; margin-bottom: 4px; }
+.video-note { font-size: .85rem; color: var(--ink-soft); margin: 0 0 14px; }
+.video-box {
+  width: min(300px, 80vw); aspect-ratio: 9 / 16; margin: 0 auto;
+  border: 2px solid var(--ink); border-radius: 18px; overflow: hidden;
+  box-shadow: 4px 5px 0 rgba(51,50,44,.15);
+  background: #000;
+}
+.video-box iframe { width: 100%; height: 100%; border: 0; display: block; }
+
+/* シェア */
+.share {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  margin: 30px 0 8px; font-size: .85rem; color: var(--ink-soft);
+}
+.share a {
+  text-decoration: none; font-weight: 700; padding: 3px 12px;
+  border: 1.5px solid var(--ink); border-radius: 999px; color: var(--ink);
+  background: var(--card);
+}
+.share a:hover { background: var(--sticky); }
+
+/* 関連記事 */
+.related { margin-top: 40px; }
+.related h2 { font-size: 1.15rem; font-weight: 900; }
+
+/* ---------- 一覧ページ ---------- */
+.list-page { padding: 44px 0 20px; }
+.list-page h1 { font-size: 1.7rem; font-weight: 900; margin: 0 0 10px; }
+.list-page .grid { margin-top: 20px; }
+
+/* ---------- 広告 ---------- */
+.ad-slot { margin: 26px 0; text-align: center; }
+.ad-label { display: block; font-size: .68rem; color: var(--ink-soft); margin-bottom: 4px; }
+
+/* ---------- フッター ---------- */
+.site-footer {
+  margin-top: 70px;
+  background: var(--card);
+  border-top: 3px solid var(--ink);
+  padding: 22px 0 26px;
+}
+.footer-cols { display: flex; flex-wrap: wrap; gap: 14px 30px; justify-content: space-between; }
+.footer-nav, .footer-friends { display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: .82rem; }
+.footer-nav a, .footer-friends a { color: var(--ink-soft); text-decoration: none; }
+.footer-nav a:hover, .footer-friends a:hover { color: var(--zunda-deep); text-decoration: underline; }
+.friends-label { color: var(--ink-soft); }
+.copyright { font-size: .75rem; color: var(--ink-soft); margin: 14px 0 0; }
+
+/* ---------- スマホ ---------- */
+@media (max-width: 620px) {
+  body { font-size: 15.5px; }
+  .hero { padding-top: 34px; }
+  .header-inner { justify-content: center; text-align: center; }
+  .footer-cols { flex-direction: column; }
+}

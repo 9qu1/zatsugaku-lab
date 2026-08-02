@@ -1,0 +1,5 @@
+{
+  "_note": "広告は記事本文下だけに出す(ユーザー方針)。トップ・一覧・固定ページ・フッターには出さない。AdSense合格後、article_bottom にユニットコードを入れる。",
+  "article_bottom": "",
+  "article_click": ""
+}
