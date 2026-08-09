@@ -311,11 +311,15 @@ pages.forEach(p => writeFileSync(join(DIST, `${p.slug}.html`), staticPage(p)));
 writeFileSync(join(DIST, 'feed.xml'), rss());
 writeFileSync(join(DIST, 'sitemap.xml'), sitemap());
 writeFileSync(join(DIST, 'robots.txt'), `User-agent: *\nAllow: /\nSitemap: ${site.url}/sitemap.xml\n`);
+// 404には旧URL転送スクリプトを仕込む（9qu1.comをこのサイトに付け替えた後に効く。それまでは発火しない）
+// ・/ai-news-daily/* /invest-daily/* → github.ioの同パスへ（切替前のSNS投稿リンク救済）
+// ・/zatsugaku-lab/* → 接頭辞を外してルートへ（サブパス時代のリンク救済）
+const legacyRedirect = '<script>(function(){var p=location.pathname;if(/^\\/(ai-news-daily|invest-daily)(\\/|$)/.test(p)){location.replace("https://9qu1.github.io"+p+location.search);}else if(/^\\/zatsugaku-lab(\\/|$)/.test(p)){location.replace(p.replace(/^\\/zatsugaku-lab/,"")+location.search||"/");}})();</script>';
 writeFileSync(join(DIST, '404.html'), layout({
   title: `ページが見つかりません | ${site.title}`,
   description: site.description,
   pageUrl: site.url,
-  body: '<section class="hero"><h1>404</h1><p class="lead">そのノートは見つかりませんでした。棚を整理したのかもしれません。<a href="./index.html">入口へ戻る</a></p></section>',
+  body: legacyRedirect + '<section class="hero"><h1>404</h1><p class="lead">そのノートは見つかりませんでした。棚を整理したのかもしれません。<a href="./index.html">入口へ戻る</a></p></section>',
 }));
 
 console.log(`✅ build完了: 記事${articles.length}本 / 固定ページ${pages.length}本 → dist/`);
